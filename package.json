@@ -1,0 +1,28 @@
+{
+  "name": "jingy-web-saas",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "vite --mode dev",
+    "dev:alp": "vite --mode alp",
+    "dev:uat": "vite --mode uat",
+    "dev:prd": "vite --mode prd",
+    "alp": "vue-tsc --noEmit && vite build --mode alp",
+    "uat": "vue-tsc --noEmit && vite build --mode uat",
+    "prd": "vue-tsc --noEmit && vite build --mode prd",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "qiankun": "^2.6.3",
+    "vue": "^3.2.25",
+    "vue-router": "^4.0.12",
+    "vuex": "^4.0.2",
+    "vuex-persistedstate": "^4.1.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.0.0",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.2",
+    "vue-tsc": "^0.29.8"
+  }
+}
