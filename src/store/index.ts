@@ -1,5 +1,6 @@
 import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate';
+import createPersistedState from 'vuex-persistedstate'
+import { ElMessage } from 'element-plus'
 
 import QIANKUN from './qiankun'
 
@@ -8,21 +9,30 @@ const modules = {
 }
 
 const state = {
-  defaultTitle: '脚手架' // document.title默认值，用于router.js中不指定title的路由显示
+  title: '脚手架', // document.title默认值，用于router.js中不指定title的路由显示
+  meta: {},
+  user: {}
 }
 
 const getters = {}
 
 const mutations = {
-  SET_BROWSER (state: any, browser: {}) {
-    state.browser = browser
+  SET_META (state: any, meta: {}) {
+    state.meta = meta
+  },
+  SET_USER (state: any, user: {}) {
+    state.user = user
   }
 }
 
 const actions = {
   // 轻提示
-  showToast ({}, { type = 'html', message = '操作成功~', duration = 3000 } = {}) {
-    
+  showToast ({}, { type = 'success' as 'success' | 'warning' | 'info' | 'error', message = '操作成功~', duration = 3000 } = {}) {
+    ElMessage({
+      type,
+      message,
+      duration
+    })
   },
   // async http ({ commit }, { service = 'gateway', api, query = {}, params = {}, handleError, success, error, complete }) { // 统一请求（简单查询返回使用）
   //   return await $http[service][api]({ query, params, handleError, success, error, complete })

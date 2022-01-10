@@ -5,7 +5,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 const routes: Array<RouteRecordRaw> = [{
   path: '/', name: 'index', redirect: { name: 'welcome' }
 }, {
-  path: '/login', name: 'login',
+  path: '/login', name: 'login', meta: { layout: 'blank' },
   component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
 }, {
   path: '/welcome', name: 'welcome',
@@ -25,8 +25,9 @@ router.beforeEach((to, from, next) => {
   const meta = to.meta
   let title = meta.title
   if (!title) {
-    title = store.state.defaultTitle
+    title = store.state.title
   }
+  store.commit('SET_META', meta)
   setTimeout(() => {
     document.title = title as string
   }, 0)
