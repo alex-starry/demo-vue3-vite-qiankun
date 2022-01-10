@@ -41,8 +41,8 @@ import CommonLeft from '../components/common/left.vue'
   height: 1px;
   background-color: #d8d8d8;
   position: absolute;
-  right: 0;
   top: 0;
+  left: 0;
   transform: scaleY(0.5);
 }
 </style>

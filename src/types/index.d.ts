@@ -46,15 +46,25 @@ export interface IUser {
   tokenRefreshKey: string
 }
 
+// HTTP请求参数配置项
 export interface IHttpRequestConfig extends AxiosRequestConfig {
   apiName: string;
   query?: any;
   requestType?: 'form';
 }
 
-
+// HTTP请求响应参数
 export interface IHttpResponse {
   ret: number,
   result: any,
   msg: string
+}
+
+// 菜单节点
+export interface IMenuItem {
+  parentId: string,
+  id: string,
+  name: string,
+  path: string,
+  children: IMenuItem[]
 }

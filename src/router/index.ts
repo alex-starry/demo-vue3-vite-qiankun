@@ -1,6 +1,7 @@
-import store from '../store'
-
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
+
+import store from '../store'
+import { IUser } from '../types'
 
 const routes: Array<RouteRecordRaw> = [{
   path: '/', name: 'index', redirect: { name: 'welcome' }
@@ -22,6 +23,16 @@ const router = createRouter({
 
 // 全局前置守卫
 router.beforeEach((to, from, next) => {
+  const user = store.state.user as IUser
+  // 没有用户信息或者用户信息过期，访问非登录页时强制跳转登录页
+  const now = Date.now()
+  if ((!user || !user.id || now >= user.tokenExpires) && to.name !== 'login') {
+    return next({ name: 'login' })
+  }
+  // 有用户信息并且用户信息过期，访问登录页时强制跳转欢迎页
+  if (user && user.id && now < user.tokenExpires && to.name === 'login') {
+    return next({ name: 'welcome' })
+  }
   const meta = to.meta
   let title = meta.title
   if (!title) {
